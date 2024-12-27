@@ -26,5 +26,5 @@ if raw_data is not None:
     ax2.set_ylabel('Success Rate (Proportion)', color='red')
     ax2.tick_params(axis='y', labelcolor='red')
     plt.title('Number of Incidents and Success Rate by Region')
-    plt.tight_layout()
-    plt.show()
+    # Save the figure
+    plt.savefig('Terrorism_Analysis_Project/figures/No_Incidents_And_Success_Rate_By_Region.png', bbox_inches='tight')
