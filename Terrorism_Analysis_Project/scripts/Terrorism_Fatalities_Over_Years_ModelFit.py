@@ -16,14 +16,14 @@ if raw_data is not None:
     X = yearly_data['iyear'].values
     y = yearly_data['nkill'].values
 
-    # Normalize year for numerical stability
-    X_normalized = X - 1970
+    # Normalise year for numerical stability
+    X_normalised = X - 1970
 
     # Log-transform fatalities for linear regression
     log_y = np.log(y)
 
     # Perform linear regression
-    X_with_intercept = np.c_[np.ones(X_normalized.shape[0]), X_normalized]
+    X_with_intercept = np.c_[np.ones(X_normalised.shape[0]), X_normalised]
     beta = np.linalg.inv(X_with_intercept.T @ X_with_intercept) @ X_with_intercept.T @ log_y
 
     # Extract parameters
@@ -32,7 +32,7 @@ if raw_data is not None:
     a = np.exp(ln_a)
 
     # Generate predictions
-    y_pred = a * np.exp(b * X_normalized)
+    y_pred = a * np.exp(b * X_normalised)
 
     # Plot the results
     plt.figure(figsize=(10, 6))
