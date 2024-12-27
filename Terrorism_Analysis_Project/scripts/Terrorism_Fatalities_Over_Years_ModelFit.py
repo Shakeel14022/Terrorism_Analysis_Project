@@ -45,7 +45,15 @@ if raw_data is not None:
     plt.ylim(0, None)
     plt.legend()
     plt.grid(True)
-    plt.show()
+        # Save the figure
+    plt.savefig('Terrorism_Analysis_Project/figures_and_statistics/Terrorism_Fatalities_Over_Years_ModelFit.png', bbox_inches='tight')
 
-    print(f"Exponential Model Equation: y(t) = {a:.2f} * e^({b:.4f} * (t - 1970))")
+    # Exponential model equation as a string
+    model_equation = f"Exponential Model Equation: y(t) = {a:.2f} * e^({b:.4f} * (t - 1970))"
+
+    # Print and append the model equation to the statistics file
+    with open(statistics_file, 'a') as f:
+        f.write("\n--- Exponential Model Equation ---\n")
+        f.write(model_equation + "\n")
+    
 
