@@ -11,10 +11,14 @@ jobs:
           command: python -m pip install --upgrade pip && pip install -r Terrorism_Analysis_Project/requirements.txt
       - run:
           name: Set PYTHONPATH
-          command: export PYTHONPATH=$PYTHONPATH:$PWD/Terrorism_Analysis_Project
+          command: |
+            export PYTHONPATH=$PYTHONPATH:$PWD/Terrorism_Analysis_Project
+            echo $PYTHONPATH
       - run:
           name: Run tests
-          command: python -m unittest discover -s Terrorism_Analysis_Project/Tests
+          command: |
+            export PYTHONPATH=$PYTHONPATH:$PWD/Terrorism_Analysis_Project
+            python -m unittest discover -s Terrorism_Analysis_Project/Tests
 
 workflows:
   version: 2
