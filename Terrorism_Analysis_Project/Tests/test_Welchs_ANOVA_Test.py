@@ -24,9 +24,14 @@ class TestWelchsANOVA(unittest.TestCase):
         welch_results = welch_anova(data=filtered_data, dv='nkill', between='attacktype1_txt')
 
         self.assertFalse(welch_results.empty, "Welch ANOVA results are empty.")
-        self.assertIn('W', welch_results.columns, "'W' column missing in Welch ANOVA results.")
-        self.assertIn('p-unc', welch_results.columns, "'p-unc' column missing in Welch ANOVA results.")
-        self.assertTrue(welch_results['W'].notnull().all(), "Welch ANOVA 'W' column contains null values.")
+        
+        # Updated: Check for actual columns returned by Welch's ANOVA
+        expected_columns = ['Source', 'ddof1', 'ddof2', 'F', 'p-unc', 'np2']
+        for column in expected_columns:
+            self.assertIn(column, welch_results.columns, f"'{column}' column missing in Welch ANOVA results.")
+        
+        # Ensure important columns like 'F' and 'p-unc' have no null values
+        self.assertTrue(welch_results['F'].notnull().all(), "Welch ANOVA 'F' column contains null values.")
         self.assertTrue(welch_results['p-unc'].notnull().all(), "Welch ANOVA 'p-unc' column contains null values.")
 
     def test_descriptive_statistics(self):
@@ -69,3 +74,4 @@ class TestWelchsANOVA(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
