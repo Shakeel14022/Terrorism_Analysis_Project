@@ -1,5 +1,7 @@
+version: 2.1
+
 jobs:
-  build-and-test:
+  test:
     docker:
       - image: circleci/python:3.8
     steps:
@@ -11,11 +13,11 @@ jobs:
           name: Set PYTHONPATH
           command: export PYTHONPATH=$PYTHONPATH:$PWD/Terrorism_Analysis_Project
       - run:
-          name: Run unit tests
+          name: Run tests
           command: python -m unittest discover -s Tests
 
 workflows:
   version: 2
-  test-and-build:
+  build-and-test:
     jobs:
       - test
