@@ -23,10 +23,21 @@ if raw_data is not None:
 
     # Plotting with adjusted y-axis
     plt.figure(figsize=(10, 6))
-    plt.bar(grouped['attacktype1_txt'], grouped['mean'], yerr=grouped['ci'], capsize=5, alpha=0.7)
+
+    # Bar plot with color palette optimised for color theory
+    colors = plt.cm.viridis(np.linspace(0, 1, len(grouped['attacktype1_txt'])))
+    plt.bar(grouped['attacktype1_txt'], grouped['mean'], yerr=grouped['ci'], capsize=5, alpha=0.85, color=colors)
+
+    # Adjust y-axis to start at 0 and have an upper bound of 12
+    plt.ylim(bottom=0, top=12)
     plt.xticks(rotation=45, ha='right')
-    plt.xlabel('Attack Type')
-    plt.ylabel('Mean Fatalities')
-    plt.title('Mean Fatalities by Attack Type with 95% Confidence Intervals')
-    # Save the figure
+
+    # Add labels, title, and caption
+    plt.xlabel('Attack Type', fontsize=12)
+    plt.ylabel('Mean Fatalities', fontsize=12)
+    plt.title('Mean Fatalities by Attack Type with 95% Confidence Intervals', fontsize=14)
+    plt.figtext(0.5, -0.32, 'The mean number of fatalities per terrorist attack type, with 95% Confidence Intervals',
+                wrap=True, horizontalalignment='center', fontsize=10)
+
+    # Save the figure in the correct directory
     plt.savefig('Terrorism_Analysis_Project/figures_and_statistics/95_ConfidenceInterval_Fatalities_By_Attacktype.png', bbox_inches='tight')
