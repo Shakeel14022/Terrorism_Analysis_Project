@@ -16,8 +16,4 @@ def load_dataset():
         print(f"An error occurred while loading the dataset: {e}")
         return None
 
-# Example usage
-if __name__ == "__main__":
-    dataset = load_dataset()
-    if dataset is not None:
-        print(f"Dataset contains {dataset.shape[0]} rows and {dataset.shape[1]} columns.")
+
