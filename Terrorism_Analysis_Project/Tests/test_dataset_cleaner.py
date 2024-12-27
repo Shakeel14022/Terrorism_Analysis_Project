@@ -18,10 +18,14 @@ class TestDatasetCleanerWithActualData(unittest.TestCase):
 
     def test_cleaning_fills_missing_text_columns(self):
         """Test if missing textual values are filled with 'Unknown'."""
+        if self.raw_data[['attacktype1_txt', 'region_txt']].isnull().sum().sum() == 0:
+            self.skipTest("No missing values in 'attacktype1_txt' or 'region_txt' to test filling with 'Unknown'.")
         cleaned_data = clean_dataset(self.raw_data)
         self.assertFalse(cleaned_data[['attacktype1_txt', 'region_txt']].isnull().any().any(), "Missing textual values were not handled.")
-        self.assertTrue((cleaned_data['attacktype1_txt'] == 'Unknown').sum() > 0, "'attacktype1_txt' missing values not filled with 'Unknown'.")
-        self.assertTrue((cleaned_data['region_txt'] == 'Unknown').sum() > 0, "'region_txt' missing values not filled with 'Unknown'.")
+        if 'attacktype1_txt' in cleaned_data.columns:
+            self.assertTrue((cleaned_data['attacktype1_txt'] == 'Unknown').sum() > 0, "'attacktype1_txt' missing values not filled with 'Unknown'.")
+        if 'region_txt' in cleaned_data.columns:
+            self.assertTrue((cleaned_data['region_txt'] == 'Unknown').sum() > 0, "'region_txt' missing values not filled with 'Unknown'.")
 
     def test_cleaning_numeric_conversion(self):
         """Test if numeric columns are converted to integers."""
