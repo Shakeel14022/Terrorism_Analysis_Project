@@ -29,4 +29,4 @@ if raw_data is not None:
     plt.ylabel('Mean Fatalities')
     plt.title('Mean Fatalities by Attack Type with 95% Confidence Intervals')
     # Save the figure
-    plt.savefig('Terrorism_Analysis_Project/figures/95_ConfidenceInterval_Fatalities_By_Attacktype.png', bbox_inches='tight')
+    plt.savefig('Terrorism_Analysis_Project/figures_and_statistics/95_ConfidenceInterval_Fatalities_By_Attacktype.png', bbox_inches='tight')
