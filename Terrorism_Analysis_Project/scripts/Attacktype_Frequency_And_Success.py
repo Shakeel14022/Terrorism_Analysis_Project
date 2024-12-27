@@ -28,4 +28,4 @@ if raw_data is not None:
     plt.xticks([i + bar_width / 2 for i in x], attack_stats['attacktype1_txt'], rotation=45, ha='right')
     plt.legend()
     # Save the figure
-    plt.savefig('Terrorism_Analysis_Project/figures/Attacktype_Frequency_And_Success.png', bbox_inches='tight')
+    plt.savefig('Terrorism_Analysis_Project/figures_and_statistics/Attacktype_Frequency_And_Success.png', bbox_inches='tight')
