@@ -15,7 +15,7 @@ def clean_dataset(data):
     columns_to_fill = ['attacktype1_txt', 'region_txt']
     for column in columns_to_fill:
         if column in data.columns:
-            data[column].fillna('Unknown', inplace=True)
+            data.loc[:, column] = data[column].fillna('Unknown')
 
     # Ensure all numeric columns have correct types
     numeric_columns = ['nkill', 'success', 'iyear', 'eventid']
