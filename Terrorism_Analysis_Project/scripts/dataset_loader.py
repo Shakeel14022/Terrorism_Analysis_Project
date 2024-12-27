@@ -1,10 +1,9 @@
 import pandas as pd
 
-def load_dataset():
+def load_dataset(file_path='Terrorism_Analysis_Project/dataset/globalterrorismdatabase_1970_2020_F.csv'):
     """
-    Loads the dataset from the dataset folder and returns it as a pandas DataFrame.
+    Loads the dataset from the given file path and returns it as a pandas DataFrame.
     """
-    file_path = 'Terrorism_Analysis_Project/dataset/globalterrorismdatabase_1970_2020_F.csv'
     try:
         data = pd.read_csv(file_path, low_memory=False)
         print("Dataset loaded successfully.")
