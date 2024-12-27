@@ -33,11 +33,4 @@ def clean_dataset(data):
     print("Dataset cleaning completed.")
     return data
 
-# Example usage
-if __name__ == "__main__":
-    from dataset_loader import load_dataset
 
-    dataset = load_dataset()
-    if dataset is not None:
-        cleaned_data = clean_dataset(dataset)
-        print(f"Cleaned dataset contains {cleaned_data.shape[0]} rows and {cleaned_data.shape[1]} columns.")
