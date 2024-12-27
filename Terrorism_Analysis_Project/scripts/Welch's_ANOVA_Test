@@ -1,0 +1,23 @@
+from scipy import stats
+import pandas as pd
+from pingouin import welch_anova
+from dataset_loader import load_dataset
+from dataset_cleaner import clean_dataset
+
+# Load and clean the dataset
+raw_data = load_dataset()
+if raw_data is not None:
+    data = clean_dataset(raw_data)
+
+    # Perform Welch's ANOVA
+    filtered_data = data[['nkill', 'attacktype1_txt']].dropna()
+    welch_results = welch_anova(data=filtered_data, dv='nkill', between='attacktype1_txt')
+
+    print("Welch's ANOVA Results:")
+    print(welch_results)
+
+# Calculate descriptive statistics
+desc_stats = filtered_data.groupby('attacktype1_txt')['nkill'].agg(['count', 'mean', 'std']).round(2)
+print("\
+      Descriptive Statistics by Attack Type:")
+print(desc_stats)
