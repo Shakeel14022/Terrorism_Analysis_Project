@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.stats import pearsonr
 from dataset_loader import load_dataset
 from dataset_cleaner import clean_dataset
 
@@ -45,15 +46,38 @@ if raw_data is not None:
     plt.ylim(0, None)
     plt.legend()
     plt.grid(True)
-        # Save the figure
+
+    plt.figtext(0.5, -0.1, 'An exponential model fit that explores changes in total fatalities resulted from terrorist incidents\n'
+                "every year, from 1970 to 2020",
+            wrap=True, horizontalalignment='center', fontsize=10)
+        
+    # Save the figure
     plt.savefig('Terrorism_Analysis_Project/figures_and_statistics/Terrorism_Fatalities_Over_Years_ModelFit.png', bbox_inches='tight')
 
     # Exponential model equation as a string
     model_equation = f"Exponential Model Equation: y(t) = {a:.2f} * e^({b:.4f} * (t - 1970))"
+
+    # Path to the statistics.txt file
+    statistics_file = 'Terrorism_Analysis_Project/figures_and_statistics/statistics.txt'
 
     # Print and append the model equation to the statistics file
     with open(statistics_file, 'a') as f:
         f.write("\n--- Exponential Model Equation ---\n")
         f.write(model_equation + "\n")
     
+# Calculate correlation
+correlation_coefficient, p_value = pearsonr(X, y)
 
+# Prepare the result as a string
+correlation_result = (
+    "\nCorrelation Analysis: Total Number of Killed Per Year\n"
+    "-----------------------------------------------------\n"
+    f"Pearson Correlation Coefficient: {correlation_coefficient:.3f}\n"
+    f"P-Value: {p_value:.2e}\n\n"
+)
+
+# Append the result to the statistics.txt file
+with open(statistics_file, "a") as f:
+     f.write(correlation_result)
+
+print("Correlation results added to statistics.txt")
