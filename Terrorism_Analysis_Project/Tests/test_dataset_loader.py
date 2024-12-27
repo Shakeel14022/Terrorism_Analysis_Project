@@ -11,17 +11,10 @@ class TestDatasetLoader(unittest.TestCase):
 
     def test_file_not_found(self):
         """Test if the function handles missing file correctly."""
-        original_file_path = 'Terrorism_Analysis_Project/dataset/globalterrorismdatabase_1970_2020_F.csv'
-
-        # Temporarily change the file path to simulate a missing file
-        try:
-            import scripts.dataset_loader as loader
-            loader.file_path = 'Terrorism_Analysis_Project/dataset/nonexistent_file.csv'
-            data = load_dataset()
-            self.assertIsNone(data, "Function did not return None for missing file.")
-        finally:
-            # Restore the original file path after the test
-            loader.file_path = original_file_path
+        non_existent_file_path = 'Terrorism_Analysis_Project/dataset/nonexistent_file.csv'
+        # Pass the non-existent file path to the function
+        data = load_dataset(file_path=non_existent_file_path)
+        self.assertIsNone(data, "Function did not return None for missing file.")
 
     def test_handle_general_exceptions(self):
         """Test if the function handles unexpected exceptions gracefully."""
