@@ -27,5 +27,5 @@ if raw_data is not None:
     plt.title('Incident Frequency and Success Rate by Attack Type')
     plt.xticks([i + bar_width / 2 for i in x], attack_stats['attacktype1_txt'], rotation=45, ha='right')
     plt.legend()
-    plt.tight_layout()
-    plt.show()
+    # Save the figure
+    plt.savefig('Terrorism_Analysis_Project/figures/Attacktype_Frequency_And_Success.png', bbox_inches='tight')
