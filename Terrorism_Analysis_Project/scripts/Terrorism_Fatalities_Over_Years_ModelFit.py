@@ -66,7 +66,7 @@ if raw_data is not None:
         f.write(model_equation + "\n")
     
 # Calculate correlation
-correlation_coefficient, p_value = pearsonr(X, y)
+correlation_coefficient, p_value = pearsonr(X_normalised, log_y)
 
 # Prepare the result as a string
 correlation_result = (
